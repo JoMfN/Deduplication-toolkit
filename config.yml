@@ -1,0 +1,17 @@
+# config.yml
+
+duplicates:
+  extensions: ['.txt', '.pdf', '.xml', '.png', '.json', '.jpg', '.obj', '.md']
+  report_path: "duplicates_report.txt"
+  filtered_report_path: "filtered_duplicates_report.txt"
+
+filter:
+  regex: "(?P<uid>[a-f0-9]{6,7})"
+  criterion: "largest"
+
+log:
+  json_output: "duplicate_metadata.json"
+  sqlite_output: "duplicates.db"
+
+delete:
+  dry_run: true
