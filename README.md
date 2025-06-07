@@ -33,6 +33,20 @@ This toolkit enables flexible, safe, and domain-aware deduplication of structure
   - Shortest filename
 
 ---
+## 🛠️ Features
+
+- 🧬 Content-based duplicate detection using SHA256 hashes
+- 🔍 UID-aware filtering using regex to avoid false positives
+- 🗃️ Metadata logging to both JSON and SQLite for auditability
+- 🧼 Safe deletion tools with dry-run and user confirmation
+- ⚖️ Priority retention logic by file size, ctime, filename lengt
+
+## 🔧 Setup
+
+```bash
+pip install -r requirements.txt
+```
+---
 
 ## 🧪 Usage Example
 
@@ -46,3 +60,19 @@ python refine_duplicates_by_uid.py duplicates_report.txt -r '_+(?P<uid>[a-z0-9]+
 # Step 3: Preview and confirm deletions
 python delete_duplicates.py filtered_duplicates_report.txt --dry-run
 ```
+
+## 🧪 Example Usage 2
+
+```bash
+python find_duplicate_files.py /data --output duplicates_report.txt
+python refine_duplicates_by_uid.py duplicates_report.txt -r '(?P<uid>[a-f0-9]{6,7})' -e .txt -o filtered_duplicates_report.txt
+python storage/json_logger.py filtered_duplicates_report.txt
+python storage/sqlite_logger.py filtered_duplicates_report.txt
+python delete_duplicates.py filtered_duplicates_report.txt --dry-run
+```
+
+## 📜 License
+
+MIT
+
+
